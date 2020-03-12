@@ -8,10 +8,10 @@ import java.util.List;
 public class TitleVerification2 {
 
     public static void main(String[] args) throws Exception{
-
-        List<String> urls = Arrays.asList("https://lulugandgeorgia.com", "https://wayfair.com/", "https://walmart.com ","https://westelm.com/");
+//https://www.luluandgeorgia.com/
+        List<String> urls = Arrays.asList("https://www.luluandgeorgia.com", "https://wayfair.com/", "https://walmart.com ","https://www.westelm.com/");
         WebDriver driver=BrowserFactory.getDriver("chrome");
-driver.get(urls.get(0));
+
 
 
         String [] titles=new String[urls.size()];
@@ -19,26 +19,25 @@ driver.get(urls.get(0));
 
         for(int i=0;i<urls.size();i++){
             driver.get(urls.get(i));
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             titles[i]=driver.getTitle();
             urlOfTheWebSites[i]=driver.getCurrentUrl();
         }
-int count=0;
+
         for (int i=0;i<urls.size();i++){
         if (titles[i].contains(" ")){
-   titles[i]= titles[i].replace(" ","").toLowerCase();
-}
+     titles[i]= titles[i].replace(" ","").toLowerCase();
+            }
+
             if (urlOfTheWebSites[i].toLowerCase().contains(titles[i])){
-                count++;
+                System.out.println("TEST PASSED URL CONTAINS its OWN TITLES");
+            }else{
+                System.out.println("TEST FAILED");
             }
         }
-if (count==4){
-    System.out.println("TEST PASSED ALL URLs CONTAINS THEIR OWN TITLES");
-}else {
-    System.out.println("TEST FAILED");
-}
 
-Thread.sleep(3);
+
+Thread.sleep(3000);
 driver.quit();
 
 
