@@ -26,7 +26,7 @@ public class TitleVerification2 {
 
         for (int i=0;i<urls.size();i++){
         if (titles[i].contains(" ")){
-     titles[i]= titles[i].replace(" ","").toLowerCase();
+        titles[i]= titles[i].replace(" ","").toLowerCase();
             }
 
             if (urlOfTheWebSites[i].toLowerCase().contains(titles[i])){
