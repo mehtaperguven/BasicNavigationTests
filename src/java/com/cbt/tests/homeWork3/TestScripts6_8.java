@@ -82,25 +82,7 @@ subscribing to practice.cybertekschool.com!”*/
 
         Assert.assertTrue(actualTextInMail.equals(expectedTextFromMail));
 
-//        System.out.println("email = " + email);
-//        driver.get("https://practice-cybertekschool.herokuapp.com/");
-//        BrowserUtils.wait(3);
-//        driver.findElement(By.linkText("Sign Up For Mailing List")).click();
-//        driver.findElement(By.name("full_name")).sendKeys("Haci CavCav");
-//        driver.findElement(By.name("email")).sendKeys(email, Keys.ENTER);
-//        BrowserUtils.wait(3);
-//        String expected = "Thank you for signing up. Click the button below to return to the home page.";
-//        String actual = driver.findElement(By.tagName("h3")).getText();
-//        Assert.assertEquals(actual,expected);
-//        BrowserUtils.wait(3);
-//
-
-
-
-
-
-
-
+//the end:)
 
     }
 
