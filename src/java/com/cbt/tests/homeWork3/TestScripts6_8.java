@@ -19,12 +19,93 @@ public class TestScripts6_8 {
     public void setup() throws Exception{
         WebDriverManager.chromedriver().version("79").setup();
         driver=new ChromeDriver();
-        driver.get(URL);
+       // driver.get(URL);
         driver.manage().window().maximize();
        Thread.sleep(3);
 
 
     }
+
+    /*Step 1. Go to "https://www.tempmailaddress.com/"
+Step 2. Copy and save email as a string.
+Step 3. Then go to “https://practicecybertekschool.herokuapp.com”
+Step 4. And click on “Sign Up For Mailing List".
+Step 5. Enter any valid name.
+Step 6. Enter email from the Step 2.
+Step 7. Click Sign Up
+Step 8. Verify that following message is displayed:
+“Thank you for signing up. Click the button below to
+
+return to the home page.”
+Step 9. Navigate back to the “https://
+www.tempmailaddress.com/”
+Step 10. Verify that you’ve received an email from
+“do-not-reply@practice.cybertekschool.com”
+Step 11. Click on that email to open it.
+Step 12. Verify that email is from: “do-notreply@practice.cybertekschool.com”
+Step 13. Verify that subject is: “Thanks for
+subscribing to practice.cybertekschool.com!”*/
+
+    @Test
+    public void testScript6() throws Exception{
+
+
+        driver.get("https://temp-mail.org/");
+        Thread.sleep(4000);
+        String emailTemp=driver.findElement(By.id("mail")).getAttribute("value");
+
+        Thread.sleep(3000);
+        driver.navigate().to("https://practice-cybertekschool.herokuapp.com");
+        driver.findElement(By.linkText("Sign Up For Mailing List")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.cssSelector("[name='full_name']")).sendKeys("Erva Erguven");
+        driver.findElement(By.xpath("//input[@type='email']")).sendKeys(emailTemp);
+        driver.findElement(By.cssSelector("[name=\"wooden_spoon\"]")).click();
+        Thread.sleep(3000);
+        String actual=driver.findElement(By.tagName("h3")).getText();
+       //System.out.println(actual);
+        String expected="Thank you for signing up. Click the button below to return to the home page.";
+        Assert.assertEquals(actual,expected);
+
+        driver.get("https://temp-mail.org/");
+        Thread.sleep(5000);
+        WebElement actualMail=driver.findElement(By.xpath("//span[@class='inboxSenderEmail' and contains(text(),'do-not-reply@practice.cybertekschool.com')]"));
+        Assert.assertTrue(actualMail.isDisplayed());
+
+        actualMail.click();
+        String text=driver.findElement(By.cssSelector("[class='from-email']")).getText();
+        Thread.sleep(3000);
+        Assert.assertTrue(text.equals("do-not-reply@practice.cybertekschool.com"));
+        Thread.sleep(3000);
+        String actualTextInMail=driver.findElement(By.tagName("h4")).getText();
+        String expectedTextFromMail="Thanks for subscribing to practice.cybertekschool.com!";
+
+        Assert.assertTrue(actualTextInMail.equals(expectedTextFromMail));
+
+//        System.out.println("email = " + email);
+//        driver.get("https://practice-cybertekschool.herokuapp.com/");
+//        BrowserUtils.wait(3);
+//        driver.findElement(By.linkText("Sign Up For Mailing List")).click();
+//        driver.findElement(By.name("full_name")).sendKeys("Haci CavCav");
+//        driver.findElement(By.name("email")).sendKeys(email, Keys.ENTER);
+//        BrowserUtils.wait(3);
+//        String expected = "Thank you for signing up. Click the button below to return to the home page.";
+//        String actual = driver.findElement(By.tagName("h3")).getText();
+//        Assert.assertEquals(actual,expected);
+//        BrowserUtils.wait(3);
+//
+
+
+
+
+
+
+
+
+    }
+
+
+
     @Test
     public void testScript7() throws Exception{
 
