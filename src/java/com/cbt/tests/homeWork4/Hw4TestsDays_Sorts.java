@@ -243,7 +243,7 @@ public void w3TagsTest(){
 //                System.out.println(each.getAttribute("href")+" is not valid url");
 //            }
 //        }
-
+//......
         int responseCode = 0;
 
         for (WebElement each : allTagsWithA) {
