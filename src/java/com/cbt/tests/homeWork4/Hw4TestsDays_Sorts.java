@@ -344,12 +344,35 @@ public void w3TagsTest(){
 
     }
 
+
+//    @Test
+//    public void test() {
+//        driver.get("https://amazon.com");
+//        driver.findElement(By.id("twotabsearchtextbox")).sendKeys("wooden spoon", Keys.ENTER);
+//        driver.findElement(By.linkText("Under $25")).click();
+//
+//        //we collect only dollar values from the price of every item
+//        List<WebElement> prices = driver.findElements(By.className("a-price-whole"));
+//        //we convert collection of web elements into collection of strings
+//        List<String> pricesText = BrowserUtils.getTextFromWebElements(prices);
+//        System.out.println(pricesText);
+//        for (String price : pricesText) {
+//
+//            //we convert every price as a string into integer
+//            int priceConverted = Integer.parseInt(price);
+//
+//            //checking if the price of every item is under 25
+//            Assert.assertTrue(priceConverted < 25);
+//        }
+//        driver.quit();
+//    }
+
 @AfterMethod
     public void close(){
         driver.quit();
 
 
 }
-
+//try to finish
 
 }
