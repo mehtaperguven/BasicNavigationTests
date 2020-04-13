@@ -329,21 +329,22 @@ public void w3TagsTest(){
 
         driver.get("https://amazon.com");
         driver.findElement(By.cssSelector("[id=\"twotabsearchtextbox\"]")).sendKeys("wooden spoon", Keys.ENTER);
-        List<WebElement> elmnts=driver.findElements(By.xpath("div[@id='brandsRefinements']//ul/li/span/a/span"));
+        List<WebElement> elmnts=driver.findElements(By.xpath("//div[@id='brandsRefinements']//ul/li/span/a/span"));
        ////div[@id='brandsRefinements']//ul/li/span/a/div/following-sibling::span
         List<String> textElmnts=new LinkedList<>();
+        Thread.sleep(4000);
+        for (WebElement each:elmnts){
 
-        int num=elmnts.size();
-        for (int i=0;i<num;i++){
-
-            textElmnts.add(elmnts.get(i).getText());
+            textElmnts.add(each.getText());
         }
+        System.out.println("Before checking prime box Brand elements \n"+textElmnts);
 
-        driver.findElement(By.xpath("(//i[@class=\"a-icon a-icon-checkbox\"])[1]")).click();
+        driver.findElement(By.xpath("(//i[@class=\"a-icon a-icon-checkbox\"])[1]")).click();//click to prime
 
         List<WebElement> afterPrimeSelectedBrandElements=driver.findElements(By.xpath("//div[@id=\"brandsRefinements\"]/ul//a/span"));
         int num2=afterPrimeSelectedBrandElements.size();
         List<String> newBrandElementsText=new LinkedList<>();
+
 
        for (int i=0;i<num2;i++){
 
@@ -351,6 +352,7 @@ public void w3TagsTest(){
            Assert.assertEquals(textElmnts.get(i),newBrandElementsText.get(i));
        }
 
+        System.out.println("After checking prime box Brand elements \n"+textElmnts);
     }
 
 
