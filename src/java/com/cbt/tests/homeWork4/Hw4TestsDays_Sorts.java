@@ -2,7 +2,7 @@ package com.cbt.tests.homeWork4;
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -19,10 +19,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class Hw4TestsDays_Sorts {
@@ -32,7 +29,7 @@ public class Hw4TestsDays_Sorts {
     @BeforeMethod
     public void setup(){
 
-        WebDriverManager.chromedriver().version("79").setup();
+        WebDriverManager.chromedriver().version("81").setup();
         driver=new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
@@ -124,11 +121,6 @@ public class Hw4TestsDays_Sorts {
 
         Select month=new Select(driver.findElement(By.id("month")));
         Select day=new Select(driver.findElement(By.cssSelector("#day")));
-
-
-
-
-
 
 
 
@@ -225,8 +217,6 @@ public void w3TagsTest(){
     //System.out.println(">>>>>>"+count);
 
 }
-
-
 
 
     @Test
@@ -335,37 +325,53 @@ public void w3TagsTest(){
 
 //hello
     @Test
-    public void moreSpoonsTest(){
+    public void moreSpoonsTest() throws Exception{
 
         driver.get("https://amazon.com");
         driver.findElement(By.cssSelector("[id=\"twotabsearchtextbox\"]")).sendKeys("wooden spoon", Keys.ENTER);
+        List<WebElement> elmnts=driver.findElements(By.xpath("div[@id='brandsRefinements']//ul/li/span/a/span"));
+       ////div[@id='brandsRefinements']//ul/li/span/a/div/following-sibling::span
+        List<String> textElmnts=new LinkedList<>();
 
+        int num=elmnts.size();
+        for (int i=0;i<num;i++){
 
+            textElmnts.add(elmnts.get(i).getText());
+        }
+
+        driver.findElement(By.xpath("(//i[@class=\"a-icon a-icon-checkbox\"])[1]")).click();
+
+        List<WebElement> afterPrimeSelectedBrandElements=driver.findElements(By.xpath("//div[@id=\"brandsRefinements\"]/ul//a/span"));
+        int num2=afterPrimeSelectedBrandElements.size();
+        List<String> newBrandElementsText=new LinkedList<>();
+
+       for (int i=0;i<num2;i++){
+
+           newBrandElementsText.add(afterPrimeSelectedBrandElements.get(i).getText());
+           Assert.assertEquals(textElmnts.get(i),newBrandElementsText.get(i));
+       }
 
     }
 
 
-//    @Test
-//    public void test() {
-//        driver.get("https://amazon.com");
-//        driver.findElement(By.id("twotabsearchtextbox")).sendKeys("wooden spoon", Keys.ENTER);
-//        driver.findElement(By.linkText("Under $25")).click();
-//
-//        //we collect only dollar values from the price of every item
-//        List<WebElement> prices = driver.findElements(By.className("a-price-whole"));
-//        //we convert collection of web elements into collection of strings
-//        List<String> pricesText = BrowserUtils.getTextFromWebElements(prices);
-//        System.out.println(pricesText);
-//        for (String price : pricesText) {
-//
-//            //we convert every price as a string into integer
-//            int priceConverted = Integer.parseInt(price);
-//
-//            //checking if the price of every item is under 25
-//            Assert.assertTrue(priceConverted < 25);
-//        }
-//        driver.quit();
-//    }
+    @Test
+    public void cheapSpoonsTest() throws Exception {
+        driver.get("https://amazon.com");
+        driver.findElement(By.id("twotabsearchtextbox")).sendKeys("wooden spoon", Keys.ENTER);
+        Thread.sleep(5000);
+        driver.findElement(By.linkText("Under $25")).click();
+//       Select select=new Select(driver.findElement(By.cssSelector("[id=\"searchDropdownBox\"]")));
+//       select.selectByVisibleText("Home & Kitchen");
+       Thread.sleep(5000);
+       List<WebElement> prices=driver.findElements(By.cssSelector("span[class=\"a-price-whole\"]"));
+       //int num=prices.size();
+       for (WebElement each:prices){
+           System.out.println(each.getText());
+
+           Assert.assertTrue(Integer.parseInt(each.getText())<25);
+       }
+
+    }
 
 @AfterMethod
     public void close(){

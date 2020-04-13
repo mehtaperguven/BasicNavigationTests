@@ -26,7 +26,7 @@ public class BrowserFactory {
 //        System.out.println(browsers);
 
             if (newBrowser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().version("79").setup();
+            WebDriverManager.chromedriver().version("81").setup();
                 return new ChromeDriver();
             } else if (newBrowser.equalsIgnoreCase("firefox")) {
                 WebDriverManager.firefoxdriver().setup();
