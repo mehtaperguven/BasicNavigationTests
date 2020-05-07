@@ -319,11 +319,9 @@ public void w3TagsTest(){
         System.out.println("......."+firstItemInTheBrand);
         Assert.assertEquals(firstItemInTheBrand,str);
 
-        //https://github.com/nikitakharchenko95/Homewwork4/blob/master/src/test/java/Tests/Homework4.java
+
     }
 
-
-//hello
     @Test
     public void moreSpoonsTest() throws Exception{
 

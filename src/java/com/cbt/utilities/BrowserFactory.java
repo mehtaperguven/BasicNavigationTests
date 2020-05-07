@@ -1,23 +1,30 @@
 package com.cbt.utilities;
 
-import io.github.bonigarcia.wdm.EdgeDriverManager;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BrowserFactory {
-    public static void main(String[] args) {
-//In all other cases,
-// return a new WebDriver object   for   ChromeDriver,FirefoxDriver, EdgeDriver or   SafariDriver b ased on the value of the stringargument.
 
+    public static void wait(int seconds){
+
+        try {
+            Thread.sleep(1000 * seconds);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+            //it shows on the console which kind of exception,
+            // reason of exception
+            //throws postpone the solution to someone else
+
+        }
     }
+
 
     public static WebDriver getDriver(String newBrowser) {
 
